@@ -83,6 +83,8 @@ function ViewResults() {
         let liElement = document.createElement('li'); 
         ulElement.appendChild(liElement); 
         liElement.textContent = `${Images.all[i].name}  ${Images.all[i].clicks} votes ${Images.all[i].shown} times`
+        
+        renderChartjs();
     }
 }
 
@@ -91,6 +93,64 @@ function randomNumber( min, max ) {
   min = Math.ceil( min );
   max = Math.floor( max );
   return Math.floor( Math.random() * ( max - min + 1 ) + min ); 
+}
+
+function renderChartjs() { 
+
+  let clicks = []; 
+  let names = [];
+  let shown = [];
+
+  for (let i = 0; i < Images.all.length; i++) {
+    clicks.push(Images.all[i].clicks); 
+    names.push(Images.all[i].name); 
+    shown.push(Images.all[i].shown); 
+  }
+
+  let ctx = document.getElementById('jsChart').getContext('2d');
+let jsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: names,
+        datasets: [{
+            label: '# of Votes',
+            data: clicks,
+            backgroundColor: [
+                
+                'rgba(54, 162, 235, 0.2)',
+                
+            ],
+            borderColor: [
+                
+                'rgba(54, 162, 235, 1)',
+                
+            ],
+            borderWidth: 1
+    }, { 
+      
+      label: '# of shown',
+    data: shown,
+    backgroundColor: [
+        
+      'rgba(255, 99, 132, 0.2)',
+        
+    ],
+    borderColor: [
+        
+      'rgba(255, 99, 132, 1)',
+        
+    ],
+    borderWidth: 1
+  }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 }
 
 image.addEventListener( 'click', eventHandler );

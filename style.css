@@ -50,7 +50,9 @@ body {
     background: #292929;
     left: 0;
   }
-  
+  main {
+    margin-top: 10px;
+  }
   main>img {
     margin-bottom: 25px;
     margin-top: 15px;
