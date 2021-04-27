@@ -53,12 +53,13 @@ function eventHandler( event ) {
 
 function renderImages() {
   let leftIndex = randomNumber( 0, imageArray.length - 1 );
-  let middleIndex = randomNumber( 0, imageArray.length - 1 );
-  let rightIndex = randomNumber( 0, imageArray.length - 1 );
+  let middleIndex;
+  let rightIndex;
 
   do {
+    middleIndex = randomNumber( 0, imageArray.length - 1 );
     rightIndex = randomNumber( 0, imageArray.length - 1 );
-  } while ( leftIndex === middleIndex === rightIndex );
+  } while ( leftIndex === middleIndex || rightIndex === middleIndex || leftIndex === rightIndex);
 
   leftImage.src = Images.all[leftIndex].img;
   middleImage.src = Images.all[middleIndex].img;
@@ -84,8 +85,10 @@ function ViewResults() {
         ulElement.appendChild(liElement); 
         liElement.textContent = `${Images.all[i].name}  ${Images.all[i].clicks} votes ${Images.all[i].shown} times`
         
-        renderChartjs();
+        
     }
+
+    renderChartjs();
 }
 
 
